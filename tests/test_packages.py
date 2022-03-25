@@ -9,6 +9,7 @@ async def test_html():
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
     assert "&#34;datasette&#34;: &#34;" in response.text
+    assert "<h1>package.json</h1>" in response.text
 
 
 @pytest.mark.asyncio

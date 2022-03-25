@@ -14,7 +14,11 @@ async def packages(request, datasette):
         return Response.html(
             await datasette.render_template(
                 "show_json.html",
-                {"data_json": json.dumps(installed_packages, indent=4)},
+                {
+                    "filename": "package.json",
+                    "data_json": json.dumps(installed_packages, indent=4),
+                },
+                request=request,
             )
         )
 
