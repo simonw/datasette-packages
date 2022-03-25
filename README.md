@@ -19,6 +19,13 @@ Visit `/-/packages` to see a list of installed Python packages.
 
 Visit `/-/packages.json` to get that back as JSON.
 
+## Demo
+
+The output of this plugin can be seen here:
+
+- https://latest-with-plugins.datasette.io/-/packages
+- https://latest-with-plugins.datasette.io/-/packages.json
+
 ## Development
 
 To set up this plugin locally, first checkout the code. Then create a new virtual environment:
