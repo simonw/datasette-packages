@@ -32,13 +32,13 @@ if you have version 2.1 or higher of the [datasette-graphql](https://datasette.i
 
 ```graphql
 {
-    packages {
-        name
-        version
-    }
+  packages {
+    name
+    version
+  }
 }
 ```
-[Demo of this query](https://latest-with-plugins.datasette.io/graphql?query=%7B%0A%20%20%20%20packages%20%7B%0A%20%20%20%20%20%20%20%20name%0A%20%20%20%20%20%20%20%20version%0A%20%20%20%20%7D%0A%7D).
+[Demo of this query](https://latest-with-plugins.datasette.io/graphql?query=%7B%0A%20%20packages%20%7B%0A%20%20%20%20name%0A%20%20%20%20version%0A%20%20%7D%0A%7D).
 
 ## Development
 
