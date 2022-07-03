@@ -26,3 +26,29 @@ async def packages(request, datasette):
 @hookimpl
 def register_routes():
     return [(r"^/-/packages(?P<format>\.json)?$", packages)]
+
+
+@hookimpl
+def graphql_extra_fields():
+    import graphene
+
+    class Package(graphene.ObjectType):
+        "An installed package"
+        name = graphene.String()
+        version = graphene.String()
+
+    return [
+        (
+            "packages",
+            graphene.Field(
+                graphene.List(Package),
+                description="List of installed packages",
+                resolver=lambda root, info: [
+                    {"name": d.project_name, "version": d.version}
+                    for d in sorted(
+                        pkg_resources.working_set, key=lambda d: d.project_name.lower()
+                    )
+                ],
+            ),
+        ),
+    ]
