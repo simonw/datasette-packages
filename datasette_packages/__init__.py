@@ -1,6 +1,38 @@
 from datasette import hookimpl, Response
 import json
+import sqlite_utils
 import pkg_resources
+import importlib.metadata
+
+
+@hookimpl
+def startup(datasette):
+    packages_db = datasette.add_memory_database("packages")
+
+    def populate(conn):
+        db = sqlite_utils.Database(conn)
+
+        def packages():
+            for distro in importlib.metadata.distributions():
+                d = {
+                    "name": distro.metadata["Name"],
+                    "version": distro.version,
+                }
+                multi_keys = {k.lower() for k in distro.metadata.multiple_use_keys}
+                for key in distro.metadata.keys():
+                    if key.lower() in multi_keys:
+                        d[key.lower()] = distro.metadata.get_all(key)
+                    else:
+                        d[key.lower()] = distro.metadata[key]
+                yield d
+
+        with conn:
+            db["packages"].insert_all(packages(), pk="name", replace=True)
+
+    async def inner():
+        await packages_db.execute_write_fn(populate)
+
+    return inner
 
 
 async def packages(request, datasette):
