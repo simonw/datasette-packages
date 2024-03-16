@@ -5,9 +5,9 @@ import importlib.metadata
 
 async def packages(request, datasette):
     installed_packages = {
-        d.name: d.version
+        d.metadata["Name"]: d.version
         for d in sorted(
-            importlib.metadata.distributions(), key=lambda d: d.name.lower()
+            importlib.metadata.distributions(), key=lambda d: d.metadata["Name"].lower()
         )
     }
     if request.url_vars["format"] == ".json":
@@ -46,9 +46,10 @@ def graphql_extra_fields():
                 graphene.List(Package),
                 description="List of installed packages",
                 resolver=lambda root, info: [
-                    {"name": d.name, "version": d.version}
+                    {"name": d.metadata["Name"], "version": d.version}
                     for d in sorted(
-                        importlib.metadata.distributions(), key=lambda d: d.name.lower()
+                        importlib.metadata.distributions(),
+                        key=lambda d: d.metadata["Name"].lower(),
                     )
                 ],
             ),
