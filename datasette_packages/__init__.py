@@ -1,12 +1,14 @@
 from datasette import hookimpl, Response
 import json
-import pkg_resources
+import importlib.metadata
 
 
 async def packages(request, datasette):
     installed_packages = {
-        d.project_name: d.version
-        for d in sorted(pkg_resources.working_set, key=lambda d: d.project_name.lower())
+        d.name: d.version
+        for d in sorted(
+            importlib.metadata.distributions(), key=lambda d: d.name.lower()
+        )
     }
     if request.url_vars["format"] == ".json":
         return Response.json(installed_packages)
@@ -44,9 +46,9 @@ def graphql_extra_fields():
                 graphene.List(Package),
                 description="List of installed packages",
                 resolver=lambda root, info: [
-                    {"name": d.project_name, "version": d.version}
+                    {"name": d.name, "version": d.version}
                     for d in sorted(
-                        pkg_resources.working_set, key=lambda d: d.project_name.lower()
+                        importlib.metadata.distributions(), key=lambda d: d.name.lower()
                     )
                 ],
             ),
