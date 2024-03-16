@@ -34,5 +34,5 @@ setup(
     entry_points={"datasette": ["packages = datasette_packages"]},
     install_requires=["datasette"],
     extras_require={"test": ["pytest", "pytest-asyncio", "datasette-graphql>=2.1"]},
-    python_requires=">=3.7",
+    python_requires=">=3.8",
 )
