@@ -1,6 +1,6 @@
 [project]
 name = "datasette-packages"
-version = "0.2.1"
+version = "0.3"
 description = "Show a list of currently installed Python packages"
 readme = "README.md"
 authors = [{name = "Simon Willison"}]
