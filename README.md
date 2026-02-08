@@ -10,9 +10,9 @@ Show a list of currently installed Python packages
 ## Installation
 
 Install this plugin in the same environment as Datasette.
-
-    $ datasette install datasette-packages
-
+```bash
+datasette install datasette-packages
+```
 ## Usage
 
 Visit `/-/packages` to see a list of installed Python packages. Each package links to a detail page at `/-/packages/package-name` showing the full metadata and README for that package.
@@ -42,16 +42,13 @@ if you have version 2.1 or higher of the [datasette-graphql](https://datasette.i
 
 ## Development
 
-To set up this plugin locally, first checkout the code. Then create a new virtual environment:
-
-    cd datasette-packages
-    python3 -mvenv venv
-    source venv/bin/activate
-
-Now install the dependencies and test dependencies:
-
-    pip install -e '.[test]'
-
-To run the tests:
-
-    pytest
+Run the tests using `uv run pytest`:
+```bash
+cd datasette-packages
+uv run pytest
+```
+To try the plugin locally, use:
+```bash
+uv run datasette
+```
+Then visit `http://localhost:8001/-/packages`
