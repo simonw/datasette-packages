@@ -1,0 +1,37 @@
+[project]
+name = "datasette-packages"
+version = "0.2.1"
+description = "Show a list of currently installed Python packages"
+readme = "README.md"
+authors = [{name = "Simon Willison"}]
+license = "Apache-2.0"
+requires-python = ">=3.10"
+classifiers = [
+    "Framework :: Datasette",
+]
+dependencies = [
+    "datasette",
+]
+
+[project.urls]
+Homepage = "https://github.com/simonw/datasette-packages"
+Issues = "https://github.com/simonw/datasette-packages/issues"
+CI = "https://github.com/simonw/datasette-packages/actions"
+Changelog = "https://github.com/simonw/datasette-packages/releases"
+
+[project.entry-points.datasette]
+packages = "datasette_packages"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0",
+    "pytest-asyncio>=1.0",
+    "datasette-graphql>=2.1",
+]
+
+[tool.uv.build-backend]
+module-root = ""
+
+[build-system]
+requires = ["uv_build>=0.10.0,<0.11.0"]
+build-backend = "uv_build"
