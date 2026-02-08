@@ -48,7 +48,10 @@ async def test_package_detail_readme():
     # datasette itself should have a README
     response = await datasette.client.get("/-/packages/datasette")
     assert response.status_code == 200
-    assert 'style="white-space: pre-wrap;"' in response.text or "<h2>README</h2>" in response.text
+    assert (
+        'style="white-space: pre-wrap;"' in response.text
+        or "<h2>README</h2>" in response.text
+    )
 
 
 @pytest.mark.asyncio

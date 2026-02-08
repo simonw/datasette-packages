@@ -13,9 +13,7 @@ async def packages(request, datasette):
         )
     ]
     if request.url_vars["format"] == ".json":
-        return Response.json(
-            {p["name"]: p["version"] for p in installed_packages}
-        )
+        return Response.json({p["name"]: p["version"] for p in installed_packages})
     else:
         return Response.html(
             await datasette.render_template(
