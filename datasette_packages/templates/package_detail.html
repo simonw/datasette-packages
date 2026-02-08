@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}{{ package_name }}{% endblock %}
+
+{% block content %}
+<h1>{{ package_name }}</h1>
+<table>
+{% for key, values in metadata_items %}
+<tr>
+  <td><strong>{{ key }}</strong></td>
+  <td>
+    {% if values|length == 1 %}
+      {{ values[0] }}
+    {% else %}
+      <ul>{% for v in values %}<li>{{ v }}</li>{% endfor %}</ul>
+    {% endif %}
+  </td>
+</tr>
+{% endfor %}
+</table>
+{% if readme %}
+<h2>README</h2>
+<pre style="white-space: pre-wrap;">{{ readme }}</pre>
+{% endif %}
+{% endblock %}

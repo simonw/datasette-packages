@@ -15,9 +15,9 @@ Install this plugin in the same environment as Datasette.
 
 ## Usage
 
-Visit `/-/packages` to see a list of installed Python packages.
+Visit `/-/packages` to see a list of installed Python packages. Each package links to a detail page at `/-/packages/package-name` showing the full metadata and README for that package.
 
-Visit `/-/packages.json` to get that back as JSON.
+Visit `/-/packages.json` to get the list back as JSON.
 
 ## Demo
 
