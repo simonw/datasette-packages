@@ -31,6 +31,7 @@ setup(
     ],
     version=VERSION,
     packages=["datasette_packages"],
+    package_data={"datasette_packages": ["templates/*.html"]},
     entry_points={"datasette": ["packages = datasette_packages"]},
     install_requires=["datasette"],
     extras_require={"test": ["pytest", "pytest-asyncio", "datasette-graphql>=2.1"]},

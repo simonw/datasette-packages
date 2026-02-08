@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Installed Packages{% endblock %}
+
+{% block content %}
+<h1>Installed Packages</h1>
+<ul>
+{% for package in packages %}
+  <li><a href="/-/packages/{{ package.name }}">{{ package.name }}</a> {{ package.version }}</li>
+{% endfor %}
+</ul>
+{% endblock %}
