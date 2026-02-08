@@ -6,16 +6,18 @@
 <h1>{{ package_name }}</h1>
 <table>
 {% for key, values in metadata_items %}
+{% if key != "Description" %}
 <tr>
   <td><strong>{{ key }}</strong></td>
   <td>
-    {% if values|length == 1 %}
+    {%- if values|length == 1 -%}
       {{ values[0] }}
-    {% else %}
+    {%- else -%}
       <ul>{% for v in values %}<li>{{ v }}</li>{% endfor %}</ul>
-    {% endif %}
+    {%- endif -%}
   </td>
 </tr>
+{% endif %}
 {% endfor %}
 </table>
 {% if readme %}
